@@ -23,11 +23,7 @@ func ReadConfig() Config {
 	viper.SetDefault("REDIS_PORT", "6379")
 	viper.SetDefault("CACHE_TTL", "3600")
 
-	viper.SetConfigType("env")
-	viper.AddConfigPath(".")
-	viper.SetConfigName(".env")
-
-	viper.ReadInConfig()
+	viper.AutomaticEnv()
 
 	config.Port = viper.GetString("PORT")
 	config.UserAgent = viper.GetString("USER_AGENT")

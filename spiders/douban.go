@@ -136,7 +136,8 @@ func (d Douban) getCalendar(userAgent string) (string, error) {
 		event := cal.AddEvent(id.String())
 		event.SetSummary(movie.Title)
 		event.SetCreatedTime(time.Now())
-		event.SetStartAt(start)
+		//event.SetStartAt(start)
+		event.SetAllDayStartAt(start)
 		event.SetURL(movie.Link)
 		event.SetDescription(fmt.Sprintf("类型：%s\n地区：%s", movie.Category, movie.Region))
 	}
