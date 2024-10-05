@@ -15,7 +15,7 @@ func main() {
 	r.Use(middlewares.ConfigMiddleware(config))
 	r.Use(middlewares.CacheMiddleware(config))
 
-	calendar := r.Group("/calendar")
+	calendar := r.Group("/")
 	{
 		holidays := new(controllers.HolidaysController)
 
