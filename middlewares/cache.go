@@ -37,7 +37,7 @@ func CacheMiddleware(config config.Config) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		key := c.Request.RequestURI
 
-		match := regexp.MustCompile(`^/calendar/`).MatchString(key)
+		match := regexp.MustCompile(`^/(holidays|movies)/`).MatchString(key)
 
 		if value, err := redisClient.Get(ctx, key).Result(); err == nil && len(value) > 0 && match {
 			response.Calendar(c, []byte(value))
