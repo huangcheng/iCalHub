@@ -9,7 +9,13 @@ The application is built using the gin framework for Go.
 ### Holidays
 
 - China
+```shell
+/holidays/china
+```
 
 ### Movies
 
 - Douban Coming Movies
+```shell
+/movies/douban
+```
