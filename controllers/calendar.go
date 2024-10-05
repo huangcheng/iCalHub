@@ -1,14 +1,17 @@
 package controllers
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/huangcheng/icalhub/config"
-	"github.com/huangcheng/icalhub/handlers"
-
 	"io"
 	"net/http"
 )
-import "github.com/huangcheng/icalhub/utils"
+
+import "github.com/gin-gonic/gin"
+
+import (
+	"github.com/huangcheng/icalhub/config"
+	"github.com/huangcheng/icalhub/handlers"
+	"github.com/huangcheng/icalhub/utils"
+)
 
 type HolidaysController struct{}
 

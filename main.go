@@ -1,7 +1,8 @@
 package main
 
+import "github.com/gin-gonic/gin"
+
 import (
-	"github.com/gin-gonic/gin"
 	"github.com/huangcheng/icalhub/config"
 	"github.com/huangcheng/icalhub/controllers"
 	"github.com/huangcheng/icalhub/middlewares"
@@ -15,14 +16,55 @@ func main() {
 	r.Use(middlewares.ConfigMiddleware(config))
 	r.Use(middlewares.CacheMiddleware(config))
 
-	calendar := r.Group("/")
+	root := r.Group("/")
 	{
-		holidays := new(controllers.HolidaysController)
 
-		calendar.GET("/holidays/china", holidays.China)
+		holidays := root.Group("/holidays")
+		{
+			controller := new(controllers.HolidaysController)
 
-		movies := new(controllers.MoviesController)
-		calendar.GET("/movies/douban", movies.Douban)
+			holidays.GET("/china", controller.China)
+		}
+
+		movies := root.Group("/movies")
+		{
+			controller := new(controllers.MoviesController)
+
+			movies.GET("/douban", controller.Douban)
+		}
+
+		root.GET("/", func(c *gin.Context) {
+			html := `
+				<!DOCTYPE html>
+				<html lang="en">
+				<meta charset="UTF-8">
+					<head>
+						<title>iCalHub</title>
+					</head>
+					<body>
+						<h1 align="center">iCalHub</h1>
+
+						<details open>
+							<summary>Holidays</summary>
+							
+							<ul>
+								<li><a href="/holidays/china">China Public Holidays</a></li>
+							</ul>
+						</details>
+
+						<details open>
+							<summary>Movies</summary>
+	
+							<ul>
+								<li><a href="/movies/douban">Douban Coming Movies</a></li>
+							</ul>
+						</details>
+					</body>
+				</html>
+			`
+
+			c.Data(200, "text/html; charset=utf-8", []byte(html))
+		})
 	}
 
 	r.Run(":" + config.Port)

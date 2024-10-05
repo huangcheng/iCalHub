@@ -1,6 +1,7 @@
 package middlewares
 
 import "github.com/gin-gonic/gin"
+
 import "github.com/huangcheng/icalhub/config"
 
 func ConfigMiddleware(config config.Config) gin.HandlerFunc {

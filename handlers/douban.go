@@ -2,13 +2,16 @@ package handlers
 
 import (
 	"fmt"
-	"github.com/PuerkitoBio/goquery"
-	ics "github.com/arran4/golang-ical"
-	"github.com/google/uuid"
 	"io"
 	"net/http"
 	"strings"
 	"time"
+)
+
+import (
+	"github.com/PuerkitoBio/goquery"
+	ics "github.com/arran4/golang-ical"
+	"github.com/google/uuid"
 )
 
 type Douban struct {

@@ -3,12 +3,19 @@ package middlewares
 import (
 	"bytes"
 	"context"
-	"github.com/gin-gonic/gin"
-	"github.com/huangcheng/icalhub/config"
-	"github.com/huangcheng/icalhub/utils"
-	"github.com/redis/go-redis/v9"
 	"regexp"
 	"time"
+)
+
+import (
+	"github.com/gin-gonic/gin"
+
+	"github.com/redis/go-redis/v9"
+)
+
+import (
+	"github.com/huangcheng/icalhub/config"
+	"github.com/huangcheng/icalhub/utils"
 )
 
 var ctx = context.Background()
