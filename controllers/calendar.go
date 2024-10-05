@@ -3,12 +3,12 @@ package controllers
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/huangcheng/icalhub/config"
+	"github.com/huangcheng/icalhub/handlers"
 
 	"io"
 	"net/http"
 )
 import "github.com/huangcheng/icalhub/utils"
-import "github.com/huangcheng/icalhub/spiders"
 
 type HolidaysController struct{}
 
@@ -35,7 +35,7 @@ func (controller HolidaysController) China(c *gin.Context) {
 }
 
 func (controller MoviesController) Douban(c *gin.Context) {
-	var spider = new(spiders.Douban)
+	var spider = new(handlers.Douban)
 
 	conf, exists := c.Get("config")
 

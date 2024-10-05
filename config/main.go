@@ -21,7 +21,7 @@ func ReadConfig() Config {
 	viper.SetDefault("REDIS_HOST", "localhost")
 	viper.SetDefault("REDIS_DB", "0")
 	viper.SetDefault("REDIS_PORT", "6379")
-	viper.SetDefault("CACHE_TTL", "3600")
+	viper.SetDefault("CACHE_TTL", "86400")
 
 	viper.AutomaticEnv()
 
