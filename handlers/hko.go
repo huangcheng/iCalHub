@@ -123,7 +123,7 @@ func (h HKO) getCalendar() (string, error) {
 	cal.SetMethod("PUBLISH")
 	cal.SetRefreshInterval("P1D")
 	cal.SetTimezoneId("Asia/Shanghai")
-	cal.SetName("月相")
+	cal.SetName("月相的日期及时间资料｜香港天文台 (HKO)")
 	cal.SetVersion("2.0")
 	cal.SetCalscale("GREGORIAN")
 

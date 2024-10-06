@@ -7,7 +7,7 @@ The application is built using the gin framework for Go.
 ## Calendars
 
 <details open>
-<summary>Holidays</summary>
+<summary>🏖️ Holidays</summary>
 
 - China
 ```shell
@@ -16,17 +16,26 @@ The application is built using the gin framework for Go.
 </details>
 
 <details open>
-<summary>Movies</summary>
+<summary>🍿 Movies</summary>
 
 
-- Douban Coming Movies
+- Upcoming releases - IMDb
+```shell
+/movies/imdb/:region
+```
+
+The region is optional. If not provided, the region will be set to China.
+
+The region code can be found [🔗here](https://www.imdb.com/calendar/).
+
+- Upcoming Movies - Douban
 ```shell
 /movies/douban
 ````
 </details>
 
 <details open>
-<summary>Astronomy</summary>
+<summary>📡 Astronomy</summary>
 
 - Date and Time of the Moon Phase｜Hong Kong Observatory(HKO)
 ```

@@ -4,7 +4,6 @@ import "github.com/gin-gonic/gin"
 
 import (
 	"github.com/huangcheng/icalhub/config"
-	"github.com/huangcheng/icalhub/controllers"
 	"github.com/huangcheng/icalhub/middlewares"
 )
 
@@ -16,71 +15,7 @@ func main() {
 	r.Use(middlewares.ConfigMiddleware(config))
 	r.Use(middlewares.CacheMiddleware(config))
 
-	root := r.Group("/")
-	{
-
-		holidays := root.Group("/holidays")
-		{
-			controller := new(controllers.HolidaysController)
-
-			holidays.GET("/china", controller.China)
-		}
-
-		movies := root.Group("/movies")
-		{
-			controller := new(controllers.MoviesController)
-
-			movies.GET("/douban", controller.Douban)
-		}
-
-		astronomy := root.Group("/astronomy")
-		{
-			controller := new(controllers.AstronomyController)
-
-			astronomy.GET("/moon/*year", controller.Moon)
-		}
-
-		root.GET("/", func(c *gin.Context) {
-			html := `
-				<!DOCTYPE html>
-				<html lang="en">
-				<meta charset="UTF-8">
-					<head>
-						<title>iCalHub</title>
-					</head>
-					<body>
-						<h1 align="center">iCalHub</h1>
-
-						<details open>
-							<summary>Holidays</summary>
-							
-							<ul>
-								<li><a href="/holidays/china">China Public Holidays</a></li>
-							</ul>
-						</details>
-
-						<details open>
-							<summary>Movies</summary>
-	
-							<ul>
-								<li><a href="/movies/douban">Douban Coming Movies</a></li>
-							</ul>
-						</details>
-
-						<details open>
-							<summary>Astronomy</summary>
-
-							<ul>
-								<li><a href="/astronomy/moon">Date and Time of the Moon Phase｜Hong Kong Observatory(HKO)</a></li>
-							</ul>
-						</details>
-					</body>
-				</html>
-			`
-
-			c.Data(200, "text/html; charset=utf-8", []byte(html))
-		})
-	}
+	setupRoutes(r)
 
 	r.Run(":" + config.Port)
 }

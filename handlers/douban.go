@@ -18,7 +18,7 @@ type Douban struct {
 	UserAgent string
 }
 
-type movie struct {
+type dmovie struct {
 	Title       string
 	ReleaseDate string
 	Link        string
@@ -52,8 +52,8 @@ func (d Douban) get() (string, error) {
 	return string(content), nil
 }
 
-func (d Douban) parse() ([]movie, error) {
-	var movies []movie
+func (d Douban) parse() ([]dmovie, error) {
+	var movies []dmovie
 
 	content, err := d.get()
 
@@ -97,7 +97,7 @@ func (d Douban) parse() ([]movie, error) {
 			category := tds.Eq(2).Text()
 			region := tds.Eq(3).Text()
 
-			movie := movie{
+			movie := dmovie{
 				Title:       strings.TrimSpace(title),
 				ReleaseDate: strings.TrimSpace(releaseDate),
 				Link:        strings.TrimSpace(link),
@@ -124,7 +124,7 @@ func (d Douban) getCalendar() (string, error) {
 	cal.SetMethod("PUBLISH")
 	cal.SetRefreshInterval("P1D")
 	cal.SetTimezoneId("Asia/Shanghai")
-	cal.SetName("即将上映电影")
+	cal.SetName("即将上映电影 - 豆瓣")
 	cal.SetVersion("2.0")
 	cal.SetCalscale("GREGORIAN")
 
