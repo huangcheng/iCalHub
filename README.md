@@ -4,7 +4,7 @@ iCalHub is a web application that allows users to find and subscribe to public c
 
 The application is built using the gin framework for Go.
 
-## Calendars
+## 🗓 Calendars
 
 <details open>
 <summary>🏖️ Holidays</summary>
