@@ -25,3 +25,14 @@ The application is built using the gin framework for Go.
 ````
 </details>
 
+<details open>
+<summary>Astronomy</summary>
+
+- Date and Time of the Moon Phase｜Hong Kong Observatory(HKO)
+```
+/astronomy/moon/:year
+```
+
+The year is optional. If not provided, the current year will be used.
+
+</details>

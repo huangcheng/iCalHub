@@ -15,9 +15,10 @@ import (
 )
 
 type Douban struct {
+	UserAgent string
 }
 
-type Movie struct {
+type movie struct {
 	Title       string
 	ReleaseDate string
 	Link        string
@@ -25,7 +26,7 @@ type Movie struct {
 	Category    string
 }
 
-func (d Douban) get(userAgent string) (string, error) {
+func (d Douban) get() (string, error) {
 	url := "https://movie.douban.com/coming"
 
 	req, err := http.NewRequest("GET", url, nil)
@@ -34,8 +35,8 @@ func (d Douban) get(userAgent string) (string, error) {
 		return "", err
 	}
 
-	if len(userAgent) > 0 {
-		req.Header.Set("User-Agent", userAgent)
+	if len(d.UserAgent) > 0 {
+		req.Header.Set("User-Agent", d.UserAgent)
 	}
 
 	resp, err := http.DefaultClient.Do(req)
@@ -51,10 +52,10 @@ func (d Douban) get(userAgent string) (string, error) {
 	return string(content), nil
 }
 
-func (d Douban) parse(userAgent string) ([]Movie, error) {
-	var movies []Movie
+func (d Douban) parse() ([]movie, error) {
+	var movies []movie
 
-	content, err := d.get(userAgent)
+	content, err := d.get()
 
 	if err != nil {
 		return movies, err
@@ -96,7 +97,7 @@ func (d Douban) parse(userAgent string) ([]Movie, error) {
 			category := tds.Eq(2).Text()
 			region := tds.Eq(3).Text()
 
-			movie := Movie{
+			movie := movie{
 				Title:       strings.TrimSpace(title),
 				ReleaseDate: strings.TrimSpace(releaseDate),
 				Link:        strings.TrimSpace(link),
@@ -111,8 +112,8 @@ func (d Douban) parse(userAgent string) ([]Movie, error) {
 	return movies, nil
 }
 
-func (d Douban) getCalendar(userAgent string) (string, error) {
-	movies, err := d.parse(userAgent)
+func (d Douban) getCalendar() (string, error) {
+	movies, err := d.parse()
 
 	if err != nil {
 		return "", err
@@ -147,6 +148,6 @@ func (d Douban) getCalendar(userAgent string) (string, error) {
 	return cal.Serialize(), nil
 }
 
-func (d Douban) Run(userAgent string) (string, error) {
-	return d.getCalendar(userAgent)
+func (d Douban) Run() (string, error) {
+	return d.getCalendar()
 }

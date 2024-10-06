@@ -33,6 +33,13 @@ func main() {
 			movies.GET("/douban", controller.Douban)
 		}
 
+		astronomy := root.Group("/astronomy")
+		{
+			controller := new(controllers.AstronomyController)
+
+			astronomy.GET("/moon/*year", controller.Moon)
+		}
+
 		root.GET("/", func(c *gin.Context) {
 			html := `
 				<!DOCTYPE html>
@@ -57,6 +64,14 @@ func main() {
 	
 							<ul>
 								<li><a href="/movies/douban">Douban Coming Movies</a></li>
+							</ul>
+						</details>
+
+						<details open>
+							<summary>Astronomy</summary>
+
+							<ul>
+								<li><a href="/astronomy/moon">Date and Time of the Moon Phase｜Hong Kong Observatory(HKO)</a></li>
 							</ul>
 						</details>
 					</body>
