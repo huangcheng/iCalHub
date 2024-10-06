@@ -130,7 +130,13 @@ func (h HKO) getCalendar() (string, error) {
 	for _, e := range events {
 		id, _ := uuid.NewUUID()
 
-		start, err := time.Parse(time.DateTime, e.Time)
+		location, err := time.LoadLocation("Asia/Shanghai")
+
+		if err != nil {
+			continue
+		}
+
+		start, err := time.ParseInLocation(time.DateTime, e.Time, location)
 
 		if err != nil {
 			continue
@@ -139,7 +145,7 @@ func (h HKO) getCalendar() (string, error) {
 		evt := cal.AddEvent(id.String())
 		evt.SetSummary(e.Name)
 		evt.SetCreatedTime(time.Now())
-		evt.SetStartAt(start)
+		evt.SetStartAt(start.Local())
 	}
 
 	return cal.Serialize(), nil
