@@ -142,7 +142,7 @@ func (d Douban) getCalendar() (string, error) {
 		event.SetCreatedTime(time.Now())
 		event.SetAllDayStartAt(start)
 		event.SetURL(movie.Link)
-		event.SetDescription(fmt.Sprintf("类型：%s\n地区：%s", movie.Category, movie.Region))
+		event.SetDescription(fmt.Sprintf("类型: %s\n\n地区: %s", movie.Category, movie.Region))
 	}
 
 	return cal.Serialize(), nil

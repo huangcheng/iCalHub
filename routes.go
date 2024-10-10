@@ -29,6 +29,14 @@ func astronomy(g *gin.RouterGroup) {
 	astronomy.GET("/moon/*year", controller.Moon)
 }
 
+func games(g *gin.RouterGroup) {
+	games := g.Group("/games")
+
+	controller := new(controllers.GamesController)
+
+	games.GET("/steam/:type/*language", controller.Steam)
+}
+
 func index(g *gin.RouterGroup) {
 	html := `
 		<!DOCTYPE html>
@@ -65,6 +73,14 @@ func index(g *gin.RouterGroup) {
 						<li><a href="/astronomy/moon">Date and Time of the Moon Phase｜Hong Kong Observatory(HKO)</a></li>
 					</ul>
 				</details>
+
+				<details open>
+					<summary>Games</summary>
+
+					<ul>
+						<li><a href="/games/steam/popular/">Upcoming Releases - Steam</a></li>
+					</ul>
+				</details>
 			</body>
 		</html>
 		`
@@ -83,6 +99,8 @@ func setupRoutes(r *gin.Engine) {
 	holidays(root)
 
 	astronomy(root)
+
+	games(root)
 
 	index(root)
 }

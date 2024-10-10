@@ -149,7 +149,7 @@ func (i IMDb) getCalendar() (string, error) {
 
 		event := cal.AddEvent(id.String())
 		event.SetSummary(movie.Title)
-		event.SetDescription(fmt.Sprintf("Categories: %s\nPerformers: %s", movie.Category, movie.Presentation))
+		event.SetDescription(fmt.Sprintf("Categories: %s\n\nPerformers: %s", movie.Category, movie.Presentation))
 		event.SetURL(movie.Link)
 		event.SetCreatedTime(time.Now())
 		event.SetAllDayStartAt(start)

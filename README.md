@@ -45,3 +45,18 @@ The region code can be found [🔗here](https://www.imdb.com/calendar/).
 The year is optional. If not provided, the current year will be used.
 
 </details>
+
+<details open>
+<summary>🎮 Games</summary>
+
+- Upcoming Releases - Steam
+```
+/games/steam/:type/:language
+```
+
+the `type` must be one of the following: `all`, `popular`;
+
+the `language` is optional, and its default value is `zh_CH`, currently only supports `zh_CH` and `en_US`.
+
+
+</details>
