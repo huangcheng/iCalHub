@@ -158,6 +158,16 @@ func (s Steam) getCalendar() (string, error) {
 			d = strings.ReplaceAll(d, "月", "-")
 			d = strings.ReplaceAll(d, "日", "")
 
+			digits := strings.Split(d, "-")
+
+			for i, digit := range digits {
+				if len(digit) == 1 {
+					digits[i] = "0" + digit
+				}
+			}
+
+			d = strings.Join(digits, "-")
+
 			s, err := time.Parse("2006-01-02", d)
 
 			if err != nil {
@@ -166,7 +176,7 @@ func (s Steam) getCalendar() (string, error) {
 
 			start = s
 		} else {
-			t, err := time.Parse("Jan 2, 2006", game.ReleaseDate)
+			t, err := time.Parse("2 Jan, 2006", game.ReleaseDate)
 			if err != nil {
 				continue
 			}
